@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Link, CircularProgress, Button } from '@material-ui/core';
+import { Typography, Link, CircularProgress, Button } from "@material-ui/core";
 import { toFirstCharUppercase } from "./constants";
 import axios from "axios";
 
@@ -21,9 +21,9 @@ const Pokemon = (props) => {
         });
     }, [pokemonId]);
 
-    const generatePokemonJSX = () => {
+    const generatePokemonJSX = (pokemon) => {
         const { name, id, species, height, weight, types, sprites } = pokemon;
-        const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
+        const fullImageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
         const { front_default } = sprites;
         return (
             <>
@@ -31,8 +31,8 @@ const Pokemon = (props) => {
                     {`${id}.`} {toFirstCharUppercase(name)}
                     <img src={front_default} />
                 </Typography>
-                <img style={{ width: "300px", height: "300px" }} src={fullImageUrl} />
-                <Typography variant="h3">Pokemon Info</Typography>l
+                <img style={{ width: "500px", height: "500px" }} src={fullImageUrl} />
+                <Typography variant="h3">Pokemon Info</Typography>
                 <Typography>
                     {"Species: "}
                     <Link href={species.url}>{species.name} </Link>
@@ -48,16 +48,18 @@ const Pokemon = (props) => {
             </>
         );
     };  
-    return (<> 
-            {pokemon === undefined && <CircularProgress />}
-            {pokemon !== undefined && pokemon && generatePokemonJSX()}
-            {pokemon === false && <Typography>Pokemon not found</Typography>}
-            {pokemon !== undefined && (
-                <Button variant="contained" onClick={() => history.push("/")}>
-                    back to pokemon
-                </Button>
-            )}
-    </>);
+    return (
+    <> 
+        {pokemon === undefined && <CircularProgress />}
+        {pokemon !== undefined && pokemon && generatePokemonJSX(pokemon)}
+        {pokemon === false && <Typography>Pokemon not found</Typography>}
+        {pokemon !== undefined && (
+            <Button variant="contained" onClick={() => history.push("/")}>
+                back to pokemon
+            </Button>
+        )}
+    </>
+    );
 };
 
 export default Pokemon;

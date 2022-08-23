@@ -5,7 +5,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { toFirstCharUppercase } from "./constants";
 import axios from "axios";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     pokedexContainer: {
         paddingTop: "20px",
         paddingLeft: "50px",
@@ -36,14 +36,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Pokedex = (props) => {
-    const { history } = props;
     const classes = useStyles();
+    const { history } = props; 
     const [pokemonData, setPokemonData] = useState({});
     const [filter, setFilter] = useState("");
-
-    const handleSearchChange = (e) => {
-        setFilter(e.target.value);
-    };
 
     useEffect(() => {
     axios
@@ -65,13 +61,15 @@ const Pokedex = (props) => {
         });
     }, []);
 
-    const getPokemonCard = (pokemonId) => {
-    console.log(pokemonData[`${pokemonId}`]);
-    const { id, name, sprite } = pokemonData[pokemonId];
+    const handleSearchChange = (e) => {
+        setFilter(e.target.value);
+    };
 
-    return (
+    const getPokemonCard = (pokemonId) => {
+      const { id, name, sprite } = pokemonData[pokemonId];
+      return (
         <Grid item xs={4} key={pokemonId}>
-            <Card onClick={() => history.push(`/${pokemonId}`)}>
+            <Card onClick={() => history.push(`/${name}`)}>
                 <CardMedia
                     className={classes.cardMedia}
                     image={sprite}
@@ -82,8 +80,9 @@ const Pokedex = (props) => {
                 </CardContent>
             </Card>
         </Grid>
-    );
-};
+        
+      );
+    };
 
     return (
         <>
@@ -92,8 +91,8 @@ const Pokedex = (props) => {
                 <div className={classes.searchContainer}>
                     <SearchIcon className={classes.searchIcon} />
                     <TextField 
-                    onChange={handleSearchChange}
-                        className={classes.searchInput} 
+                        className={classes.searchInput}
+                        onChange={handleSearchChange} 
                         label="Pokemon" 
                         variant="standard"
                     />
