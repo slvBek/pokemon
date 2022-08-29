@@ -1,49 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent, CircularProgress, Typography, TextField }from "@material-ui/core";
-import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { toFirstCharUppercase } from "./constants";
 import axios from "axios";
 
-const useStyles = makeStyles((theme) => ({
-    pokedexContainer: {
-        paddingTop: "20px",
-        paddingLeft: "50px",
-        paddingRight: "50px",
-    },
-    cardMedia: {
-       margin: "auto",
-    },
-    cardContent: {
-        textAlign: "center",
-    },
-    searchContainer: {
-        display: "flex",
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        paddingLeft: "20px",
-        paddingRight: "20px",
-        marginTop: "5px",
-        marginBottom: "5px",
-    },
-    searchIcon: {
-        alignSelf: "flex-end",
-        marginBottom: "5px",
-    },
-    searchInput: {
-        width: "200px",
-        margin: "5px",
-    },
-}));
-
 const Pokedex = (props) => {
-    const classes = useStyles();
     const { history } = props; 
     const [pokemonData, setPokemonData] = useState({});
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
     axios
-        .get(`https://pokeapi.co/api/v2/pokemon?limit=898`) //  or 807
+        .get(`https://pokeapi.co/api/v2/pokemon?limit=1154`) //  or 807
         .then(function (response) {
             const { data } = response;
             const { results } = data;
@@ -69,43 +37,42 @@ const Pokedex = (props) => {
       const { id, name, sprite } = pokemonData[pokemonId];
       return (
         <Grid item xs={4} key={pokemonId}>
-            <Card onClick={() => history.push(`/${name}`)}>
+            <Card style={{ width: "410px", padding: "30px", margin: "10px", borderRadius: "40px", backgroundColor: "rgb(15 23 42)" }} onClick={() => history.push(`/${name}`)}>
                 <CardMedia
-                    className={classes.cardMedia}
+                    className="cardMedia"
                     image={sprite}
-                    style={{ width: "130px", height: "130px" }}
+                    style={{ width: "160px", height: "160px", display: "bloc", marginLeft: "auto", marginRight: "auto" }}
                 />
-                <CardContent className={classes.cardContent}>
-                    <Typography>{`${id}. ${toFirstCharUppercase(name)}`}</Typography>
+                <CardContent className="cardContent">
+                    <Typography style={{ fontSize: "2rem", textAlign: "center", color: "orange" }}>{`${id}. ${toFirstCharUppercase(name)}`}</Typography>
                 </CardContent>
             </Card>
         </Grid>
-        
       );
     };
 
     return (
         <>
-        <AppBar position="static">
-            <Toolbar>
-                <div className={classes.searchContainer}>
-                    <SearchIcon className={classes.searchIcon} />
-                    <TextField 
-                        className={classes.searchInput}
-                        onChange={handleSearchChange} 
-                        label="Pokemon" 
-                        variant="standard"
-                    />
+        <AppBar style={{ backgroundColor: "rgb(15 23 42)" }} position="static">
+            <Toolbar style={{ margin: "3px" }}>
+                <div className="searchContainer">
+                    <SearchIcon className="searchIcon" />
+                        <TextField style={{ backgroundColor: "white" }}
+                            className="searchInput"
+                            onChange={handleSearchChange} 
+                            label="Pokemon" 
+                            variant="standard"
+                        />
                 </div>
             </Toolbar>
-        </AppBar>
+        </AppBar><h1 style={{ textAlign: "center", color: "orange"}}>My Pokemon</h1>
         {pokemonData ? (
-            <Grid container spacing={2} className={classes.pokedexContainer}>
-            {Object.keys(pokemonData).map(
-                (pokemonId) =>
+            <Grid style={{width: "100%", margin: "18px" }} container spacing={3} className="pokedexContainer">
+                {Object.keys(pokemonData).map(
+                    (pokemonId) =>
                     pokemonData[pokemonId].name.includes(filter) &&
                     getPokemonCard(pokemonId)
-            )}
+                )}
             </Grid>
         ) : (
            <CircularProgress />
