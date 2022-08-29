@@ -20,9 +20,7 @@ const Pokedex = (props) => {
                 newPokemonData[index + 1] = {
                     id: index + 1,
                     name: pokemon.name,
-                    sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-                        index + 1
-                    }.png`,
+                    sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${index + 1}.svg`,
                 };
             });
             setPokemonData(newPokemonData);
@@ -41,7 +39,7 @@ const Pokedex = (props) => {
                 <CardMedia
                     className="cardMedia"
                     image={sprite}
-                    style={{ width: "160px", height: "160px", display: "bloc", marginLeft: "auto", marginRight: "auto" }}
+                    style={{ width: "100px", height: "100px", display: "bloc", marginLeft: "auto", marginRight: "auto" }}
                 />
                 <CardContent className="cardContent">
                     <Typography style={{ fontSize: "2rem", textAlign: "center", color: "orange" }}>{`${id}. ${toFirstCharUppercase(name)}`}</Typography>
