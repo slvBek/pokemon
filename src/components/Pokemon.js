@@ -33,18 +33,17 @@ const Pokemon = (props) => {
                 </Typography>
                 <div style={{ display: "grid", display: "block", marginRight: "auto", marginLeft: "auto", padding: "2rem", width: "100%", maxWidth: "1140px", maxHeight: "400px", padding: "8rem 6rem", display: "flex", alignItems: "center", background: "rgb(0 0 0 / 38%)", boxShadow: "0 0.75rem 2rem 0 rgba(0, 0, 0, 0.1)", borderRadius: "2rem", border: "1px solid rgba(255, 255, 255, 0.125)" }}>
                 <img style={{ display: "block", marginRight: "auto", marginLeft: "20px", width: "500px", height: "500px" }} src={fullImageUrl} />
-                <Typography style={{ textAlign: "center", color: "orange", marginTop: "-380px" }} variant="h3">Pokemon Info</Typography>
-                <Typography style={{ textAlign: "center", color: "orange", fontSize: "30px" }}>
+                <Typography style={{ color: "orange", marginTop: "-285px", marginLeft: "685px", position: "absolute" }} variant="h3">Pokemon Info</Typography>
+                <Typography style={{ color: "orange", fontSize: "30px", marginTop: "-124px", position: "absolute", marginLeft: "695px" }}>
                     {"Species: "}
                     <Link style={{ color: "white" }}href={species.url}>{species.name} </Link>
                 </Typography>
-                <Typography style={{ textAlign: "center", color: "orange", fontSize: "30px" }}>Height: {height} </Typography>
-                <Typography style={{ textAlign: "center", color: "orange", fontSize: "30px" }}>Weight: {weight} </Typography>
-                <Typography style={{ textAlign: "center", color: "orange", fontSize: "30px" }} variant="h6"> Types:</Typography>
+                <Typography style={{ textAlign: "center", color: "orange", fontSize: "30px", marginTop: "-7px", marginLeft: "770px", position: "absolute" }}>Height: {height} </Typography>
+                <Typography style={{ textAlign: "center", color: "orange", fontSize: "30px", marginLeft: "758px", marginTop: "35px", marginTop: "126px", position: "absolute" }}>Weight: {weight} </Typography>
+                <Typography style={{ textAlign: "center", color: "orange", fontSize: "30px", marginTop: "245px", marginRight: "297px" }} variant="h6"> Types:</Typography>
                 {types.map((typeInfo) => {
                     const { type } = typeInfo;
-                    const { name } = type;
-                    return <Typography style={{ textAlign: "center", color: "orange", fontSize: "30px" }} key={name}> {`${name}`}</Typography>;
+                    return <Typography style={{ textAlign: "center", color: "orange", fontSize: "30px", marginTop: "242px", position: "absolute", marginLeft: "855px" }} key={name}> {`${name}`}</Typography>;
                 })}
                 </div>
             </>
@@ -56,7 +55,7 @@ const Pokemon = (props) => {
         {pokemon !== undefined && pokemon && generatePokemonJSX(pokemon)}
         {pokemon === false && <Typography>Pokemon not found</Typography>}
         {pokemon !== undefined && (
-            <Button style={{ left: "680px" }} variant="contained" onClick={() => history.push("/")}>
+            <Button style={{ left: "1540px", bottom: "50px" }} variant="contained" onClick={() => history.push("/")}>
                 Back
             </Button>
         )}

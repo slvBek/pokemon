@@ -65,9 +65,9 @@ const Pokedex = (props) => {
                         />
                 </div>
             </Toolbar>
-        </AppBar><h1 style={{ textAlign: "center", color: "orange"}}>My Pokemon</h1>
+        </AppBar><h1 style={{ textAlign: "center", color: "orange" }}>My Pokemon</h1>
         {pokemonData ? (
-            <Grid style={{width: "100%", margin: "18px" }} container spacing={3} className="pokedexContainer">
+            <Grid style={{width: "100%", margin: "50px" }} container spacing={3} className="pokedexContainer">
                 {Object.keys(pokemonData).map(
                     (pokemonId) =>
                     pokemonData[pokemonId].name.includes(filter) &&
